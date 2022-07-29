@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UsersTypeSeeder extends Seeder
+class BrandSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,10 @@ class UsersTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_types')->insert([
-            ['description' => 'Administrator'],
-            ['description' => 'Guest']
+        DB::table('brands')->insert([
+            ['name' => 'Mastercard'],
+            ['name' => 'Visa'],
+            ['name' => 'Elo'],
         ]);
     }
 }
