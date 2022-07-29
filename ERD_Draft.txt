@@ -1,0 +1,28 @@
+user
+- id
+- email
+- password
+- name
+- type FK
+
+user_type
+- id
+- description
+
+card
+- id
+- name UNIQUE VARCHAR(80)
+- slug UNIQUE
+- image
+- brand FK
+- category FK
+- limit NULL
+- annual_fee NULL
+
+brand
+- id
+- name
+
+category
+- id
+- name
