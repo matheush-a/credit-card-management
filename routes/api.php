@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +37,19 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::put('/', [AuthController::class, 'logout']);
     });
 
-    // TODO: Add middleware for admin only 
+    Route::group(['prefix' => 'brands'], function() {
+        Route::get('/', [BrandController::class, 'index']);
+    });
+
     Route::group(['prefix' => 'cards'], function() {
         Route::get('/', [CardController::class, 'index']);
+        Route::post('/remove/{id}', [CardController::class, 'remove']);
+        Route::post('/', [CardController::class, 'store']);
+        Route::put('/{id}', [CardController::class, 'update']);
+        Route::get('/show/{id}', [CardController::class, 'show']);
+    });
+
+    Route::group(['prefix' => 'categories'], function() {
+        Route::get('/', [CategoryController::class, 'index']);
     });
 });

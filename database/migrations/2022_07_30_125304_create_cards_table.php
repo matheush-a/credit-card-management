@@ -19,9 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('name', 80)->unique();
             $table->string('slug')->unique();
+            $table->string('image');
             $table->decimal('limit', 9, 3)->nullable();
             $table->decimal('annual_fee', 9, 3)->nullable();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->foreign('category_id')->references('id')->on('categories');
         });

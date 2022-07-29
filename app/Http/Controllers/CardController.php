@@ -5,19 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CardController extends Controller
 {
-    /*
-    The features must be covered by unit tests;
-        ● The list must be paginated on the backend and contain a maximum of 10 items per
-        page; OK
-        ● The list can be filtered on the backend by name; OK
-        ● The list must contain the name of the card, brand [Visa, Mastercard, Elo] and category OK
-        [Silver, Gold, Platinum, Black]; OK
-        ● The list must be ordered by the name of the card; OK
-        ● Only administrators can access the functionality. X
-    */
     protected Card $card;
     protected User $user;
 
@@ -29,10 +20,13 @@ class CardController extends Controller
 
     public function index(Request $request)
     {
+        $this->authorize('interact', Card::class);
+
         $name = $request->name;
         $builder = $this->card;
 
         $select = [
+            'cards.id',
             'cards.name',
             'cards.brand_id',
             'cards.category_id',
@@ -47,5 +41,67 @@ class CardController extends Controller
             ->select($select)
             ->paginate(10)
             ->sortBy('name');
+    }
+
+    public function remove($id)
+    {
+        $this->authorize('interact', Card::class);
+
+        $card = $this->card->find($id);
+
+        if(!$card) {
+            return response()->json("Card not found.", Response::HTTP_BAD_REQUEST);
+        }
+
+        $this->card->remove($id);
+    }
+
+    public function store(Request $request)
+    {
+        $this->authorize('interact', Card::class);
+        
+        $request->validate([
+            'name' => ['required', 'unique:cards', 'max:80'],
+            'slug' => ['required', 'unique:cards'],
+            'image' => ['required'],
+            'brand_id' => ['required', 'integer', 'exists:brands,id'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+        ]);
+        
+        $this->card->register($request->all());
+    }
+
+    public function show(int $id)
+    {
+        $this->authorize('interact', Card::class);
+
+        $card = $this->card->find($id);
+
+        if(!$card) {
+            return response()->json("Card not found.", Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->card->show($card->id);
+    }
+
+    public function update(int $id, Request $request)
+    {
+        $this->authorize('interact', Card::class);
+
+        $request->validate([
+            'name' => ['required', 'unique:cards', 'max:80'],
+            'slug' => ['required', 'unique:cards'],
+            'image' => ['required'],
+            'brand_id' => ['required', 'integer', 'exists:brands,id'],
+            'category_id' => ['required', 'integer', 'exists:categories,id'],
+        ]);
+
+        $card = $this->card->find($id);
+
+        if(!$card) {
+            return response()->json("Card not found.", Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->card->updateCard($card, $request->all());
     }
 }
