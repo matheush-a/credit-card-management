@@ -23,7 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('user_type_id')->references('id')->on('users_type');
+            $table->foreign('user_type_id')->references('id')->on('user_types');
         });
     }
 

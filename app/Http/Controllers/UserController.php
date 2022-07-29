@@ -21,11 +21,16 @@ class UserController extends Controller
             'email' => ['required', 'email:rfc', 'unique:users'],
             'name' => ['required', 'min:3'],
             'password' => ['required', 'min:8'],
-            'user_type_id' => ['required'],
+            'user_type_id' => ['required', 'exists:user_types,id'],
         ]);
 
         $user = $this->user->register($request->all());
 
         return $user;
+    }
+
+    public function update(Request $request)
+    {
+        return $request;
     }
 }
