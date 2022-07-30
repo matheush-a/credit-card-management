@@ -28,9 +28,4 @@ class UserController extends Controller
 
         return $user;
     }
-
-    public function update(Request $request)
-    {
-        return $request;
-    }
 }
