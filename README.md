@@ -1,9 +1,13 @@
 # CreditCardManager
 
 In order to make application work at it's best, it is fundamental to install locally the following:
+
 Composer: [Composer's official webpage](https://getcomposer.org/download/)
+
 Laravel: [Laravel's official webpage](https://laravel.com/docs/9.x/installation)
+
 MySQL: [MySQL's official webpage](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/general-installation-issues.html)
+
 
 After downloading and extracting this project, you must run 'composer install' for dependencies installation.
 
