@@ -30,7 +30,6 @@ class CardTest extends TestCase
 
     public function test_index_successful()
     {
-        $card = $this->card::factory()->make();
         $user = $this->user::factory()->create([
             'user_type_id' => 1
         ]);
@@ -40,6 +39,16 @@ class CardTest extends TestCase
         
         $response->assertStatus(Response::HTTP_OK);
     }
+
+    public function test_index_failure()
+    {
+        $card = $this->card::factory()->create();
+
+        $response = $this->get('/api/cards/', $this->headers);
+        
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+
 
     public function test_show_successful()
     {
