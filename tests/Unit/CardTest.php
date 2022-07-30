@@ -95,7 +95,10 @@ class CardTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->post('/api/cards/', $card->attributesToArray());
+            ->post('/api/cards/', 
+                $card->attributesToArray(), 
+                $this->headers
+            );
         
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
