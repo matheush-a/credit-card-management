@@ -40,13 +40,4 @@ class AuthController extends Controller
             Response::HTTP_OK
         );
     }
-
-    public function logout(Request $request) {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json(
-            "Token successfully deleted",
-            Response::HTTP_NO_CONTENT
-        );
-    }
 }

@@ -80,12 +80,16 @@ class User extends Authenticatable
 
     public function register($data)
     {
-        $data['password'] = Hash::make($data['password']);
         $instance = $this->newInstance($data);
         $instance->user_type_id = $data['user_type_id'];
         $instance->save();
         
         return $instance;
+    }
+
+    public function setPasswordAttribute(string $password)
+    {
+        $this->attributes['password'] = Hash::make($password);
     }
 
     public function userType()
