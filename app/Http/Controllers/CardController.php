@@ -23,24 +23,8 @@ class CardController extends Controller
         $this->authorize('interact', Card::class);
 
         $name = $request->name;
-        $builder = $this->card;
 
-        $select = [
-            'cards.id',
-            'cards.name',
-            'cards.brand_id',
-            'cards.category_id',
-        ];
-
-        if($name) {
-            $builder = $builder->where('name', 'like', '%'.$name.'%');
-        }
-        
-        return $builder
-            ->with('brand:id,name', 'category:id,name')
-            ->select($select)
-            ->paginate(10)
-            ->sortBy('name');
+        return $this->card->index($name);
     }
 
     public function remove($id)

@@ -28,6 +28,26 @@ class Card extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function index($name)
+    {
+        $select = [
+            'cards.id',
+            'cards.name',
+            'cards.brand_id',
+            'cards.category_id',
+        ];
+
+        if($name) {
+            $builder = $this->where('name', 'like', '%'.$name.'%');
+        }
+
+        return $builder
+            ->with('brand:id,name', 'category:id,name')
+            ->select($select)
+            ->paginate(10)
+            ->sortBy('name');
+    }
+
     public function register($data)
     {
         $instance = $this->newInstance($data);
