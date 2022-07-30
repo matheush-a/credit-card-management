@@ -37,6 +37,8 @@ class Card extends Model
             'cards.category_id',
         ];
 
+        $builder = $this->newInstance();
+
         if($name) {
             $builder = $this->where('name', 'like', '%'.$name.'%');
         }
@@ -69,8 +71,8 @@ class Card extends Model
     {
         return $this->where('id', $id)
             ->with('brand:id,name', 'category:id,name')
-            ->select('cards.name', 'cards.image', 'cards.limit', 'cards.annual_fee', 'cards.brand_id', 'cards.category_id')
-            ->get();
+            ->select('cards.name', 'cards.image', 'cards.limit', 'cards.annual_fee', 'cards.brand_id', 'cards.category_id', 'cards.created_at', 'cards.updated_at')
+            ->first();
     }
 
     public function updateCard($card, $data) {

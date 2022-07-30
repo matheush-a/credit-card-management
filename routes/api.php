@@ -33,10 +33,6 @@ Route::group(['prefix' => 'users'], function() {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::group(['prefix' => 'users'], function() {
-        Route::put('/', [AuthController::class, 'logout']);
-    });
-
     Route::group(['prefix' => 'brands'], function() {
         Route::get('/', [BrandController::class, 'index']);
     });
@@ -46,7 +42,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::post('/remove/{id}', [CardController::class, 'remove']);
         Route::post('/', [CardController::class, 'store']);
         Route::put('/{id}', [CardController::class, 'update']);
-        Route::get('/show/{id}', [CardController::class, 'show']);
+        Route::get('/{id}', [CardController::class, 'show']);
     });
 
     Route::group(['prefix' => 'categories'], function() {

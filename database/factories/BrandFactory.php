@@ -15,7 +15,7 @@ class BrandFactory extends Factory
     public function definition()
     {
         return [
-            'id' => fake()->numerify('#'),
+            'id' => fake()->numerify('####'),
             'name' => fake()->name(),
         ];
     }
