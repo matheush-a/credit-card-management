@@ -42,13 +42,10 @@ class CardTest extends TestCase
 
     public function test_index_failure()
     {
-        $card = $this->card::factory()->create();
-
         $response = $this->get('/api/cards/', $this->headers);
         
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
-
 
     public function test_show_successful()
     {
