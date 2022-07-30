@@ -18,6 +18,8 @@ class CategoryController extends Controller
 
     public function index()
     {
+        $this->authorize('interact', Category::class);
+
         return $this->category->select([
             'id',
             'name'

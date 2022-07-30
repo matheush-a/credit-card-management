@@ -18,6 +18,8 @@ class BrandController extends Controller
 
     public function index()
     {
+        $this->authorize('interact', Brand::class);
+
         return $this->brand->select([
             'id',
             'name'
