@@ -28,4 +28,4 @@ IMPORTANT: You should access Credit Card API
 
 There's an available Postman's environment with all the necessary endpoints for this application: [Credit Card workspace](https://app.getpostman.com/join-team?invite_code=26e49ce5df57174fc470524587a3d182&target_code=a9f10dc5fbec678d5488e809eeab1147)
 
-In case of any problem, I'm available at mathzalmeida@gmail.com or you can send me a menssage via Whatsapp (if you have my phone number).
+In case of any problem, I'm available at matheusalmeida97@proton.me
